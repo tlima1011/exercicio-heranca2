@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.stream.Stream;
-
 import entities.ImportedProduct;
 import entities.Product;
 import entities.UsedProduct;
@@ -32,41 +30,28 @@ public class Main {
 			System.out.print("Common, used or imported (C/U/I)? ");
 			type = sc.next().charAt(0); 
 			type = Character.toUpperCase(type);
+			sc.nextLine();
+			System.out.print("Name: ");
+			String productName = sc.nextLine(); //Tablet
+			System.out.print("Price: $"); 
+			productPrice = sc.nextDouble(); //260.00
 			switch(type) {
 				case 'I':
-					sc.nextLine();
-					System.out.print("Name: ");
-					String productName = sc.nextLine(); //Tablet
-					System.out.print("Price: $"); 
-					productPrice = sc.nextDouble(); //260.00
 					System.out.print("Customs fee: "); 
 					customsFee = sc.nextDouble(); //20.00
 					cf += customsFee;
 					sum += productPrice;
-					ImportedProduct imported = new ImportedProduct(productName, productPrice, customsFee); 
-					products.add(imported);
+					products.add(new ImportedProduct(productName, productPrice, customsFee));
 					break; 
-				case 'U': 
-					sc.nextLine();
-					System.out.print("Name: ");
-					productName = sc.nextLine();
-					System.out.print("Price: $");
-					productPrice = sc.nextDouble(); 
+				case 'U':  
 					sum += productPrice;
 					System.out.print("Manufacture date (DD/MM/YYYY): ");
 					Date manufacture = sdf.parse(sc.next());
-					UsedProduct used = new UsedProduct(productName, productPrice, manufacture);  
-					products.add(used);
+					products.add(new UsedProduct(productName, productPrice, manufacture));
 					break;
 				case 'C':
-					sc.nextLine();
-					System.out.print("Name: ");
-					productName = sc.nextLine(); 
-					System.out.print("Product: $");
-					productPrice = sc.nextDouble();
 					sum += productPrice;
-					Product product = new Product(productName, productPrice);
-					products.add(product); 
+					products.add(new Product(productName, productPrice)); 
 					break;
 				default: 
 					System.out.println("Inválido, tente outro");
@@ -79,7 +64,7 @@ public class Main {
 		for (Product product : products) {
 			System.out.println(product.priceTag());
 		}
-		System.out.println("Total Price $" +String.format("%.2f", sum));
+		System.out.println("\nTotal Price $" +String.format("%.2f", sum));
 		System.out.println("Average Price $" +String.format("%.2f", avg)); 
 		sc.close();
 	}
