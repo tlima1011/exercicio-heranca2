@@ -49,12 +49,9 @@ public class Main {
 					Date manufacture = sdf.parse(sc.next());
 					products.add(new UsedProduct(productName, productPrice, manufacture));
 					break;
-				case 'C':
+				default:
 					sum += productPrice;
 					products.add(new Product(productName, productPrice)); 
-					break;
-				default: 
-					System.out.println("Inválido, tente outro");
 			}
 		}
 		sum += cf;
